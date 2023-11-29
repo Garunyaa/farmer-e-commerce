@@ -92,10 +92,10 @@ export const searchFarmer = async (req, res) => {
       farmers.email = new RegExp(email, "i");
     }
     if (phone_number) {
-      farmers.phone_number = phone_number;
+      farmers.phone_number = new RegExp(phone_number);
     }
     if (country) {
-      farmers.country = country;
+      farmers.country = new RegExp(country, "i");;
     }
 
     if (!name && !email && !phone_number && !country) {

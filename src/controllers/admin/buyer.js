@@ -139,10 +139,10 @@ export const searchBuyer = async (req, res) => {
       buyers.email = new RegExp(email, "i");
     }
     if (phone_number) {
-      buyers.phone_number = phone_number;
+      buyers.phone_number = new RegExp(`^${phone_number.slice(0, 5)}`);
     }
     if (country) {
-      buyers.country = country;
+      buyers.country = new RegExp(country, "i");
     }
 
     if (!name && !email && !phone_number && !country) {
@@ -151,7 +151,6 @@ export const searchBuyer = async (req, res) => {
     }
 
     const findBuyer = await Buyer.find({ $and: [buyers] }).select("-password");
-
     if (findBuyer.length == 0) {
       return errorResponse(res, 404, "Buyers not found", {});
     }
@@ -160,4 +159,4 @@ export const searchBuyer = async (req, res) => {
     console.error(error);
     return errorResponse(res, 500, "Internal Server Error", { error: error.message });
   }
-};
+}

@@ -5,7 +5,7 @@ import { idValidator } from "../../helpers/id-validator";
 const buyerValidation = Joi.object({
   name: Joi.string().min(3).max(20).required(),
   email: Joi.string().email().required(),
-  phone_number: Joi.number().required(),
+  phone_number: Joi.string().required(),
   country: Joi.string().required(),
   password: Joi.string().min(6).required(),
   profile_picture: Joi.array(),
